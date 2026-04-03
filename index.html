@@ -12,57 +12,69 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f6fb;color:#1a1a2e;min-height:100vh}
-.app{max-width:900px;margin:0 auto;padding:12px}
-.header{background:#1B3A6B;color:#fff;border-radius:14px;padding:14px 18px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
-.header h1{font-size:20px;font-weight:600}
-.header p{font-size:12px;opacity:.7;margin-top:2px}
-.tabs{display:flex;gap:0;margin-bottom:12px;background:#fff;border-radius:10px;padding:4px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.tab{flex:1;padding:8px 6px;font-size:13px;background:none;border:none;border-radius:8px;cursor:pointer;color:#666;font-weight:500;transition:all .15s}
+.app{max-width:900px;margin:0 auto;padding:10px}
+.header{background:#1B3A6B;color:#fff;border-radius:12px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.header h1{font-size:18px;font-weight:600}
+.header p{font-size:11px;opacity:.7;margin-top:2px}
+.tabs{display:flex;gap:0;margin-bottom:10px;background:#fff;border-radius:10px;padding:3px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.tab{flex:1;padding:8px 4px;font-size:12px;background:none;border:none;border-radius:8px;cursor:pointer;color:#666;font-weight:500;transition:all .15s}
 .tab.active{background:#1B3A6B;color:#fff}
 .panel{display:none}.panel.active{display:block}
-.card{background:#fff;border-radius:12px;padding:14px 16px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.card{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 .section-label{font-size:11px;font-weight:600;color:#fff;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px}
 .sl-info{background:#1B3A6B}.sl-bat{background:#1565C0}.sl-def{background:#2E7D32}.sl-run{background:#6A1B9A}
-.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-bottom:10px}
+
+/* 폼 그리드 - 모바일 기본 3열, 넓으면 5열 */
+.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:8px}
+.form-grid-info{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px}
+.form-grid-info .full{grid-column:1/-1}
 .form-group{display:flex;flex-direction:column;gap:3px}
-.form-group label{font-size:11px;color:#666;font-weight:500}
-.form-group input{padding:7px 9px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;background:#fafafa;transition:border .15s;outline:none}
+.form-group label{font-size:10px;color:#666;font-weight:500}
+.form-group input{padding:7px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;background:#fafafa;transition:border .15s;outline:none;width:100%}
 .form-group input:focus{border-color:#1B3A6B;background:#fff}
-.btn{padding:9px 18px;border-radius:8px;font-size:14px;cursor:pointer;font-weight:600;border:none;transition:all .15s}
+
+.btn{padding:9px 16px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;border:none;transition:all .15s}
 .btn-primary{background:#1B3A6B;color:#fff}.btn-primary:hover{background:#142f5a}
 .btn-secondary{background:#f0f0f0;color:#333}.btn-secondary:hover{background:#e0e0e0}
 .btn-danger{background:#fce8e8;color:#a32d2d}.btn-danger:hover{background:#f5c6c6}
 .btn-success{background:#e8f5e9;color:#2E7D32}.btn-success:hover{background:#c8e6c9}
-.btn-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+
 .msg{font-size:13px;padding:8px 12px;border-radius:8px;margin-bottom:10px}
 .msg-ok{background:#e8f5e9;color:#2e7d32}.msg-err{background:#fce8e8;color:#a32d2d}
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th{background:#1B3A6B;color:#fff;padding:7px 6px;text-align:center;font-weight:600;white-space:nowrap;font-size:11px}
-td{padding:6px 6px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:12px}
+
+/* 목록 테이블 - 스크롤 없이 꽉 차게 */
+.table-wrap{width:100%;overflow:hidden}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{background:#1B3A6B;color:#fff;padding:6px 3px;text-align:center;font-weight:600;font-size:10px;word-break:keep-all;line-height:1.2}
+td{padding:5px 3px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:11px;word-break:break-all;line-height:1.2}
 tr:nth-child(even) td{background:#f8f9ff}
 tr:hover td{background:#e8f0fc}
 .avg-high{color:#2E7D32;font-weight:700}.avg-low{color:#a32d2d;font-weight:700}.err-cell{color:#F57C00;font-weight:700}
 .no-data{text-align:center;padding:2rem;color:#999;font-size:13px}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:1rem}
-.stat-card{background:#f8f9ff;border-radius:10px;padding:12px 14px;border:1px solid #e8eaf6}
-.stat-card .slabel{font-size:11px;color:#666;margin-bottom:4px;font-weight:500}
-.stat-card .svalue{font-size:22px;font-weight:700;color:#1B3A6B}
-.stat-card .ssub{font-size:11px;color:#888;margin-top:2px}
-.highlight-box{background:#f8f9ff;border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid #e8eaf6;font-size:13px}
-.section-title{font-size:14px;font-weight:700;color:#1B3A6B;margin:12px 0 8px;padding-bottom:4px;border-bottom:2px solid #e8eaf6}
-.backup-section{margin-bottom:16px}
+
+/* 모바일 컬럼 너비 고정 */
+.col-no{width:5%}.col-date{width:12%}.col-opp{width:13%}
+.col-ab{width:8%}.col-h{width:8%}.col-e{width:7%}
+.col-avg{width:12%}.col-btn{width:9%}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:1rem}
+.stat-card{background:#f8f9ff;border-radius:10px;padding:10px 12px;border:1px solid #e8eaf6}
+.stat-card .slabel{font-size:10px;color:#666;margin-bottom:3px;font-weight:500}
+.stat-card .svalue{font-size:20px;font-weight:700;color:#1B3A6B}
+.stat-card .ssub{font-size:10px;color:#888;margin-top:2px}
+.highlight-box{background:#f8f9ff;border-radius:10px;padding:10px 12px;margin-bottom:8px;border:1px solid #e8eaf6;font-size:12px;line-height:1.6}
+.section-title{font-size:14px;font-weight:700;color:#1B3A6B;margin:10px 0 8px;padding-bottom:4px;border-bottom:2px solid #e8eaf6}
+.backup-section{margin-bottom:14px}
 .backup-section p{font-size:13px;color:#555;margin-bottom:8px;line-height:1.5}
 .warn{color:#a32d2d;font-weight:600}
 .edit-notice{background:#e3f2fd;color:#1565C0;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;margin-bottom:10px}
-.hide-sm{display:table-cell}
-@media(max-width:600px){
-  .hide-sm{display:none}
-  table{font-size:11px}
-  td,th{padding:5px 4px}
-  .form-grid{grid-template-columns:repeat(3,1fr)}
-  .tab{font-size:12px;padding:7px 4px}
-  .header h1{font-size:17px}
+
+@media(min-width:600px){
+  .form-grid{grid-template-columns:repeat(5,1fr)}
+  .form-grid-info{grid-template-columns:repeat(3,1fr)}
+  .form-grid-info .full{grid-column:auto}
+  th,td{font-size:12px;padding:6px 5px}
 }
 </style>
 </head>
@@ -84,10 +96,10 @@ tr:hover td{background:#e8f0fc}
   <div id="edit-notice" class="edit-notice" style="display:none">✏️ 수정 모드 — 변경 후 저장하세요.</div>
   <div class="card">
     <span class="section-label sl-info">📅 경기 기본 정보</span>
-    <div class="form-grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+    <div class="form-grid-info">
       <div class="form-group"><label>날짜</label><input type="date" id="f-date"></div>
       <div class="form-group"><label>대회명</label><input type="text" id="f-tour" placeholder="예) 리틀야구대회"></div>
-      <div class="form-group"><label>상대팀</label><input type="text" id="f-opp" placeholder="상대팀명"></div>
+      <div class="form-group full"><label>상대팀</label><input type="text" id="f-opp" placeholder="상대팀명"></div>
     </div>
   </div>
   <div class="card">
@@ -135,12 +147,15 @@ tr:hover td{background:#e8f0fc}
     </div>
     <div class="table-wrap">
       <table>
+        <colgroup>
+          <col class="col-no"><col class="col-date"><col class="col-opp">
+          <col class="col-ab"><col class="col-h"><col class="col-e">
+          <col class="col-avg"><col class="col-btn"><col class="col-btn">
+        </colgroup>
         <thead><tr>
-          <th>#</th><th>날짜</th><th class="hide-sm">대회명</th><th>상대</th>
-          <th>타수</th><th>안타</th><th class="hide-sm">2루</th><th class="hide-sm">3루</th><th class="hide-sm">홈런</th>
-          <th class="hide-sm">타점</th><th class="hide-sm">득점</th><th class="hide-sm">볼넷</th><th class="hide-sm">삼진</th>
-          <th class="hide-sm">PO</th><th class="hide-sm">A</th><th>E</th><th class="hide-sm">도루</th><th>타율</th><th class="hide-sm">수비율</th>
-          <th>수정</th><th>삭제</th>
+          <th>#</th><th>날짜</th><th>상대팀</th>
+          <th>타수</th><th>안타</th><th>실책</th>
+          <th>타율</th><th>수정</th><th>삭제</th>
         </tr></thead>
         <tbody id="game-tbody"></tbody>
       </table>
@@ -239,14 +254,17 @@ function renderList(){
   const tb=v('game-tbody');v('total-count').textContent=games.length;
   if(!games.length){tb.innerHTML=`<tr><td colspan="21" class="no-data">입력된 경기 기록이 없습니다.</td></tr>`;return;}
   const s=[...games].sort((a,b)=>b.date.localeCompare(a.date));
-  tb.innerHTML=s.map((g,i)=>{const a=ba(g.h,g.ab),d=dr(g.po,g.ast,g.e);
-    return `<tr><td>${s.length-i}</td><td>${g.date.slice(5)}</td><td class="hide-sm">${g.tour}</td><td>${g.opp}</td>
-      <td>${g.ab}</td><td>${g.h}</td><td class="hide-sm">${g['2b']}</td><td class="hide-sm">${g['3b']}</td><td class="hide-sm">${g.hr}</td>
-      <td class="hide-sm">${g.rbi}</td><td class="hide-sm">${g.r}</td><td class="hide-sm">${g.bb}</td><td class="hide-sm">${g.k}</td>
-      <td class="hide-sm">${g.po}</td><td class="hide-sm">${g.ast}</td><td class="${g.e>0?'err-cell':''}">${g.e}</td>
-      <td class="hide-sm">${g.sb}/${g.sba}</td><td class="${ac(a)}">${a}</td><td class="hide-sm">${d}</td>
-      <td><button class="btn btn-secondary" style="padding:3px 8px;font-size:11px" onclick="editGame(${g.id})">수정</button></td>
-      <td><button class="btn btn-danger" style="padding:3px 8px;font-size:11px" onclick="deleteGame(${g.id})">삭제</button></td>
+  tb.innerHTML=s.map((g,i)=>{const a=ba(g.h,g.ab);
+    return `<tr>
+      <td>${s.length-i}</td>
+      <td>${g.date.slice(5)}</td>
+      <td style="font-size:10px">${g.opp}</td>
+      <td>${g.ab}</td>
+      <td>${g.h}</td>
+      <td class="${g.e>0?'err-cell':''}">${g.e}</td>
+      <td class="${ac(a)}">${a}</td>
+      <td><button class="btn btn-secondary" style="padding:2px 5px;font-size:10px;border-radius:5px" onclick="editGame(${g.id})">수정</button></td>
+      <td><button class="btn btn-danger" style="padding:2px 5px;font-size:10px;border-radius:5px" onclick="deleteGame(${g.id})">삭제</button></td>
     </tr>`;}).join('');
 }
 function sm(k){return games.reduce((a,g)=>a+(+g[k]||0),0)}
