@@ -37,7 +37,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .msg{font-size:13px;padding:8px 12px;border-radius:8px;margin-bottom:10px}
 .msg-ok{background:#e8f5e9;color:#2e7d32}.msg-err{background:#fce8e8;color:#a32d2d}
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:12px;min-width:680px}
+table{width:100%;border-collapse:collapse;font-size:11px}
 th{background:#1B3A6B;color:#fff;padding:7px 6px;text-align:center;font-weight:600;white-space:nowrap;font-size:11px}
 td{padding:6px 6px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:12px}
 tr:nth-child(even) td{background:#f8f9ff}
@@ -55,7 +55,11 @@ tr:hover td{background:#e8f0fc}
 .backup-section p{font-size:13px;color:#555;margin-bottom:8px;line-height:1.5}
 .warn{color:#a32d2d;font-weight:600}
 .edit-notice{background:#e3f2fd;color:#1565C0;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;margin-bottom:10px}
-@media(max-width:480px){
+.hide-sm{display:table-cell}
+@media(max-width:600px){
+  .hide-sm{display:none}
+  table{font-size:11px}
+  td,th{padding:5px 4px}
   .form-grid{grid-template-columns:repeat(3,1fr)}
   .tab{font-size:12px;padding:7px 4px}
   .header h1{font-size:17px}
@@ -132,10 +136,10 @@ tr:hover td{background:#e8f0fc}
     <div class="table-wrap">
       <table>
         <thead><tr>
-          <th>#</th><th>날짜</th><th>대회명</th><th>상대</th>
-          <th>타수</th><th>안타</th><th>2루</th><th>3루</th><th>홈런</th>
-          <th>타점</th><th>득점</th><th>볼넷</th><th>삼진</th>
-          <th>PO</th><th>A</th><th>E</th><th>도루</th><th>타율</th><th>수비율</th>
+          <th>#</th><th>날짜</th><th class="hide-sm">대회명</th><th>상대</th>
+          <th>타수</th><th>안타</th><th class="hide-sm">2루</th><th class="hide-sm">3루</th><th class="hide-sm">홈런</th>
+          <th class="hide-sm">타점</th><th class="hide-sm">득점</th><th class="hide-sm">볼넷</th><th class="hide-sm">삼진</th>
+          <th class="hide-sm">PO</th><th class="hide-sm">A</th><th>E</th><th class="hide-sm">도루</th><th>타율</th><th class="hide-sm">수비율</th>
           <th>수정</th><th>삭제</th>
         </tr></thead>
         <tbody id="game-tbody"></tbody>
@@ -236,11 +240,11 @@ function renderList(){
   if(!games.length){tb.innerHTML=`<tr><td colspan="21" class="no-data">입력된 경기 기록이 없습니다.</td></tr>`;return;}
   const s=[...games].sort((a,b)=>b.date.localeCompare(a.date));
   tb.innerHTML=s.map((g,i)=>{const a=ba(g.h,g.ab),d=dr(g.po,g.ast,g.e);
-    return `<tr><td>${s.length-i}</td><td>${g.date.slice(5)}</td><td>${g.tour}</td><td>${g.opp}</td>
-      <td>${g.ab}</td><td>${g.h}</td><td>${g['2b']}</td><td>${g['3b']}</td><td>${g.hr}</td>
-      <td>${g.rbi}</td><td>${g.r}</td><td>${g.bb}</td><td>${g.k}</td>
-      <td>${g.po}</td><td>${g.ast}</td><td class="${g.e>0?'err-cell':''}">${g.e}</td>
-      <td>${g.sb}/${g.sba}</td><td class="${ac(a)}">${a}</td><td>${d}</td>
+    return `<tr><td>${s.length-i}</td><td>${g.date.slice(5)}</td><td class="hide-sm">${g.tour}</td><td>${g.opp}</td>
+      <td>${g.ab}</td><td>${g.h}</td><td class="hide-sm">${g['2b']}</td><td class="hide-sm">${g['3b']}</td><td class="hide-sm">${g.hr}</td>
+      <td class="hide-sm">${g.rbi}</td><td class="hide-sm">${g.r}</td><td class="hide-sm">${g.bb}</td><td class="hide-sm">${g.k}</td>
+      <td class="hide-sm">${g.po}</td><td class="hide-sm">${g.ast}</td><td class="${g.e>0?'err-cell':''}">${g.e}</td>
+      <td class="hide-sm">${g.sb}/${g.sba}</td><td class="${ac(a)}">${a}</td><td class="hide-sm">${d}</td>
       <td><button class="btn btn-secondary" style="padding:3px 8px;font-size:11px" onclick="editGame(${g.id})">수정</button></td>
       <td><button class="btn btn-danger" style="padding:3px 8px;font-size:11px" onclick="deleteGame(${g.id})">삭제</button></td>
     </tr>`;}).join('');
